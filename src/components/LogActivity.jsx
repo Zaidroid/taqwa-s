@@ -4,18 +4,35 @@ import React, { useState } from 'react';
     function LogActivity() {
       const [date, setDate] = useState('');
       const [partner, setPartner] = useState('');
-      const [protection, setProtection] = useState('');
+      const [protection, setProtection] = useState(''); // Initialize as empty string
       const [notes, setNotes] = useState('');
 
       const handleSubmit = (e) => {
         e.preventDefault();
-        // In a real app, you'd save this data to local storage or a database.
-        console.log({ date, partner, protection, notes });
+
+        // Create a log entry object
+        const logEntry = {
+          date,
+          partner,
+          protection,
+          notes,
+        };
+
+        // Get existing logs from localStorage
+        const existingLogs = JSON.parse(localStorage.getItem('activityLogs') || '[]');
+
+        // Add the new log entry to the array
+        existingLogs.push(logEntry);
+
+        // Save the updated logs back to localStorage
+        localStorage.setItem('activityLogs', JSON.stringify(existingLogs));
+
         // Reset form
         setDate('');
         setPartner('');
         setProtection('');
         setNotes('');
+        alert('Activity logged successfully!'); // Provide feedback to the user
       };
 
       return (
@@ -60,11 +77,10 @@ import React, { useState } from 'react';
               />
             </div>
 
-            {/* Protection Input */}
+            {/* Protection Input - Now a dropdown */}
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <label htmlFor="protection" style={{ marginBottom: theme.spacing(1) }}>Protection Used</label>
-              <input
-                type="text"
+              <select
                 id="protection"
                 value={protection}
                 onChange={(e) => setProtection(e.target.value)}
@@ -76,7 +92,11 @@ import React, { useState } from 'react';
                   backgroundColor: theme.palette.background.paper,
                   color: theme.palette.text.primary,
                 }}
-              />
+              >
+                <option value="">Select...</option>
+                <option value="Yes">Yes</option>
+                <option value="No">No</option>
+              </select>
             </div>
 
             {/* Notes Input */}

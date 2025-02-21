@@ -1,27 +1,56 @@
 import React, { useState } from 'react';
+    import { useNavigate } from 'react-router-dom';
     import theme from '../theme';
 
     function Register() {
       const [username, setUsername] = useState('');
       const [password, setPassword] = useState('');
       const [confirmPassword, setConfirmPassword] = useState('');
+      const [error, setError] = useState('');
+      const navigate = useNavigate();
 
       const handleSubmit = (e) => {
         e.preventDefault();
+
         // Basic validation
         if (password !== confirmPassword) {
-          alert("Passwords don't match!");
+          setError("Passwords don't match!");
           return;
         }
-        console.log({ username, password });
+
+        // Retrieve existing users from localStorage
+        const existingUsers = JSON.parse(localStorage.getItem('users') || '{}');
+
+        // Check if the username is already taken
+        if (existingUsers[username]) {
+          setError('Username already taken.');
+          return;
+        }
+
+        // Add the new user to the object
+        existingUsers[username] = password;
+
+        // Save the updated object back to localStorage
+        localStorage.setItem('users', JSON.stringify(existingUsers));
+
+        // Set loggedIn flag and username in localStorage
+        localStorage.setItem('loggedIn', 'true');
+        localStorage.setItem('username', username);
+
+        // Redirect to home page
+        navigate('/');
+
+        //Clear the form fields
         setUsername('');
         setPassword('');
         setConfirmPassword('');
+
       };
 
       return (
         <div className="container" style={{ color: theme.palette.text.primary }}>
           <h1 style={theme.typography.h1}>Register</h1>
+          {error && <p style={{...theme.typography.body1, color: 'red'}}>{error}</p>}
           <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: theme.spacing(2) }}>
             <div style={{ display: 'flex', flexDirection: 'column' }}>
               <label htmlFor="username" style={{ marginBottom: theme.spacing(1) }}>Username</label>
