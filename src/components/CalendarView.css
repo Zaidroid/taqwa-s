@@ -1,0 +1,52 @@
+/* src/components/CalendarView.css */
+
+    .custom-calendar {
+      border: none; /* Remove default border */
+      border-radius: 8px; /* Rounded corners */
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Material Design shadow */
+      background-color: #1e1e1e; /* Paper color */
+      color: #fff; /* Text color */
+      font-family: 'Roboto', sans-serif; /* Roboto font */
+    }
+
+    .react-calendar__navigation button {
+      color: #ff69b4; /* Primary color for navigation buttons */
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .react-calendar__tile {
+      padding: 0.75em;
+      text-align: center;
+      line-height: normal;
+    }
+
+    .react-calendar__tile--now {
+      background-color: #ff7f50; /* Secondary color for today's date */
+      color: #fff;
+    }
+
+    .react-calendar__tile--active {
+      background-color: #ff69b4; /* Primary color for selected date */
+      color: #121212;
+      border-radius: 50%;
+    }
+
+    .react-calendar__month-view__days__day--weekend {
+      color: #ff7f50;
+    }
+
+    .activity-marker {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: #ff69b4; /* Primary color for activity marker */
+      margin: 0 auto;
+    }
+
+    .react-calendar__month-view__weekdays__weekday {
+      color: #aaaaaa;
+      text-transform: uppercase;
+      font-size: 0.75em;
+      font-weight: bold;
+    }

@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      background-color: #121212;
+      color: #ffffff;
+    }
+
+    .container {
+      padding: 20px;
+    }
+
+    h1, h2, h3 {
+      color: #ff7f50; /* Coral */
+    }
+
+    .accent {
+      color: #ff69b4; /* Hot Pink */
+    }
+
+    /* Remove previous button and input styles */
+    button,
+    input[type="text"],
+    input[type="date"],
+    input[type="time"],
+    input[type="password"],
+    input[type="email"],
+    textarea {
+      /* Styles will be handled in components */
+    }
